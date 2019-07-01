@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package go.micro.srv.PostHouses;
+
+service Example {
+	rpc PostHouses(Request) returns (Response) {}
+	rpc Stream(StreamingRequest) returns (stream StreamingResponse) {}
+	rpc PingPong(stream Ping) returns (stream Pong) {}
+}
+
+message Message {
+	string say = 1;
+}
+//传入
+message Request {
+//	sessionid
+	string Sessionid = 1;
+//	从前端接收到的数据,不做任何处理直接给到服务
+    bytes Max =2 ;
+}
+
+//传出
+message Response {
+	string Errno = 1;
+    string Errmsg = 2;
+//	返回的房屋id
+    int64  House_Id = 3;
+}
+
+message StreamingRequest {
+	int64 count = 1;
+}
+
+message StreamingResponse {
+	int64 count = 1;
+}
+
+message Ping {
+	int64 stroke = 1;
+}
+
+message Pong {
+	int64 stroke = 1;
+}
